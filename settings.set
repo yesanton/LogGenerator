@@ -1,0 +1,4 @@
+number_of_traces: 1000
+cycle_time: 7
+cycle_time_dispersion: 3
+

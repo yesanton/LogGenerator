@@ -1,0 +1,18 @@
+[Order]
+payload: Timestamp
+payload2: Resource
+in_1_n_relation_to: Picking
+
+[Picking]
+payload: Timestamp
+payload2: Resource
+in_n_1_relation_to: Delivery
+
+[Delivery]
+payload: Timestamp
+payload2: Resource
+in_n_m_relation_to: Payment
+
+[Payment]
+payload: Timestamp
+payload2: Resource
