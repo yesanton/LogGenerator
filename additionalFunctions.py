@@ -1,11 +1,11 @@
 
 import random
 from random import randint
-def sampleSubSets(ar):
+def sampleSubSets(ar, maxN = 3):
     set1 = set(ar)
     tempAr = []
     while 1:
-        t_n = randint(1, 3) % (len(set1) + 1)
+        t_n = randint(1, maxN) % (len(set1) + 1)
         t1 = random.sample(set1, t_n)
         set1.difference_update(t1)
 

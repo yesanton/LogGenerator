@@ -22,7 +22,7 @@ class Activity:
 class logElement:
     def __init__(self):
         self.activity = ''
-        self.resouce = ''
+        self.resource = ''
         self.itemsSet = []
         self.timestamp = None
         self.caseID = ''
