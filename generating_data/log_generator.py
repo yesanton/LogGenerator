@@ -1,10 +1,13 @@
 #this file contains main code for the log generator
-from additionalFunctions import sampleSubSets
-from log_constructs import Activity, logElement
+import datetime
 import random
 from random import randint
 from random import randrange
-import datetime
+
+from log_constructs import Activity, logElement
+
+from generating_data.additionalFunctions import sampleSubSets
+
 #activities in the process 'Order', 'Picking', 'Delivery', 'Payment'
 #resouces in the process 'User1', 'User2', 'User3',
 
@@ -78,7 +81,7 @@ for k in range(0,10):
 
         # the deliveries of different items with be defferentiated
         # only by the
-         
+
 
         #here will be about payments
 
