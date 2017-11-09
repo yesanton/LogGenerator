@@ -11,7 +11,7 @@ from generating_data.additionalFunctions import sampleSubSets
 #activities in the process 'Order', 'Picking', 'Delivery', 'Payment'
 #resouces in the process 'User1', 'User2', 'User3',
 
-universe_of_items = ["pasta", "pesto", "cheese", "brötchen", "pizza", "borshch"]
+universe_of_items = ["pasta", "pesto", "cheese", "brotchen", "pizza", "borshch"]
 time_slot = 15 #min
 
 startDate = datetime.datetime(2017, 7, 11,6,00)
@@ -159,10 +159,10 @@ log = log
 f = open('csvfile.csv','w')
 
 for el in log:
-    st = el.activity + ", " + \
-         el.caseID + ", " + \
-         el.timestamp.strftime("%Y-%m-%d %H:%M:%S") + ", " + \
-         el.resource + '\n'
+    st = el.activity + "," + \
+         el.caseID + "," + \
+         el.timestamp.strftime("%Y-%m-%d %H:%M:%S") + "," + \
+         el.resource + "," + '+'.join(el.itemsSet) + '\n'
     f.write(st)
 
 

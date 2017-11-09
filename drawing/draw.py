@@ -37,9 +37,26 @@ import plotly.plotly as py
 from plotly.graph_objs import *
 
 import networkx as nx
+
+from drawing.additional_functions import calculatePositionsForNodesInAGraph, annotateNodesWithNames, \
+    defineColorMapForGraphDrawing
+from drawing.make_graph import getGraphFromLog
+
 plotly.tools.set_credentials_file(username='AntonYeshchenko', api_key='5eT8pYJMAXm8ebBixW2P')
 
-G=nx.random_geometric_graph(200,0.125)
+nodes_list, edges_list = getGraphFromLog()
+positions = calculatePositionsForNodesInAGraph(nodes_list)
+
+
+#G=nx.random_geometric_graph(200,0.125)
+
+G=nx.Graph(edges_list)
+G.add_nodes_from(positions.keys())
+for n in positions:
+    G.node[n]['pos'] = positions[n]
+
+print (G.node)
+
 pos=nx.get_node_attributes(G,'pos')
 
 dmin=1
@@ -77,7 +94,7 @@ node_trace = Scatter(
     marker=Marker(
         showscale=True,
         # colorscale options
-        # 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' |
+        # 'Greys' | 'Greens' | 'B   luered' | 'Hot' | 'Picnic' | 'Portland' |
         # Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'
         colorscale='YIGnBu',
         reversescale=True,
@@ -91,19 +108,26 @@ node_trace = Scatter(
         ),
         line=dict(width=2)))
 
+annotated_nodes = annotateNodesWithNames(nodes_list)
+color_map =  defineColorMapForGraphDrawing(nodes_list)
+
 for node in G.nodes():
     x, y = G.node[node]['pos']
     node_trace['x'].append(x)
     node_trace['y'].append(y)
+    node_info = annotated_nodes[node]  # '# of connections: '+str(len(adjacencies))
+    node_trace['text'].append(node_info)
+    node_trace['marker']['color'].append(color_map[node])
 
 ####################################################
 
 print (G.edges)
 
 for node, adjacencies in enumerate(G.edges):
-    node_trace['marker']['color'].append(len(adjacencies))
-    node_info = '# of connections: '+str(len(adjacencies))
-    node_trace['text'].append(node_info)
+    print (node, adjacencies)
+    #node_trace['marker']['color'].append(len(adjacencies))
+    # node_info = annotated_nodes[node]#'# of connections: '+str(len(adjacencies))
+    # node_trace['text'].append(node_info)
 
 ####################################################
 
