@@ -97,14 +97,15 @@ def calculatePositionsForNodesInAGraph(nodes):
             pos[i.id] = (x,y)
         #TODO process pickings and find right place for them
         else:
-            if not i.case_ids[0] in pick_case:
+            elem_temp = list(i.case_ids)[0]
+            if not elem_temp in pick_case:
                 newDictTemp = dict()
                 newDictTemp[i.resource] = [(i.id, i.timestamp)]
-                pick_case[i.case_ids[0]] = newDictTemp
-            elif not i.resource in pick_case[i.case_ids[0]]:
-                pick_case[i.case_ids[0]][i.resource] = [(i.id, i.timestamp)]
+                pick_case[elem_temp] = newDictTemp
+            elif not i.resource in pick_case[elem_temp]:
+                pick_case[elem_temp][i.resource] = [(i.id, i.timestamp)]
             else:
-                pick_case[i.case_ids[0]][i.resource].append((i.id, i.timestamp))
+                pick_case[elem_temp][i.resource].append((i.id, i.timestamp))
 
 
     for i in pick_case:
